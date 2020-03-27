@@ -38,7 +38,6 @@ class ViewController: UIViewController {
         isFinishedTypingNumber = true
         
         if let symbol = sender.currentTitle{
-            
             calculator.setNumber(displayValue)
             if let result = calculator.calculateButton(symbol: symbol) {
                 displayValue = result

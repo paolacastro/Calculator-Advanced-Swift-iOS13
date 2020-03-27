@@ -40,9 +40,9 @@ struct Calculator {
                 return n1 + n2
             case "-":
                 return n1 - n2
-            case "*":
+            case "×":
                 return n1 * n2
-            case "/":
+            case "÷":
                 return n1 / n2
             default:
                 fatalError("The operation chosen is not supported")
