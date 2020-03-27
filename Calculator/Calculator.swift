@@ -18,15 +18,16 @@ struct Calculator {
     
     mutating func calculateButton(symbol: String) -> Double? {
         if let n = number {
-            if symbol == "+/-" {
+            switch symbol {
+            case "+/-":
                 return n * -1
-            } else if symbol == "AC" {
+            case "AC":
                 return 0
-            } else if symbol == "%" {
+            case "%" :
                 return n / 100
-            } else if symbol == "=" {
+            case "=" :
                 return performCalculation(n2: n)
-            } else {
+            default:
                 intermediateCalculation = (n1: n, operation: symbol)
             }
         }
