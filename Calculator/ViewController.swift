@@ -9,7 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var isFinishedTypingNumber: Bool = false
+    private var isFinishedTypingNumber: Bool = true
+    
+    var calculator = Calculator()
     
     @IBOutlet weak var displayLabel: UILabel!
     
@@ -21,7 +23,13 @@ class ViewController: UIViewController {
             return number
         }
         set {
-            displayLabel.text = String(newValue)
+            let isInt = floor(newValue) == newValue
+            
+            if !isInt {
+                displayLabel.text = String(newValue)
+            } else {
+                displayLabel.text = String(Int(newValue))
+            }
         }
     }
     
@@ -30,14 +38,13 @@ class ViewController: UIViewController {
         isFinishedTypingNumber = true
         
         if let symbol = sender.currentTitle{
-            if symbol == "+/-" {
-                displayValue *= -1
-            } else if symbol == "AC" {
-                displayLabel.text = "0"
-            } else if symbol == "%" {
-                displayValue /= 100
+            calculator.setNumber(displayValue)
+            if let result = calculator.calculateButton(symbol: symbol) {
+                displayValue = result
             }
+            
         }
+        isFinishedTypingNumber = true
     
     }
 
@@ -46,7 +53,6 @@ class ViewController: UIViewController {
         
         if let numValue = sender.currentTitle {
             if isFinishedTypingNumber {
-                print(numValue)
                 displayLabel.text = numValue
                 isFinishedTypingNumber = false
             } else {
